@@ -35,7 +35,7 @@ def calculate_total_amount(amount: float, term: int) -> float or str:
                 total_amount = amount
                 percent = bank_deposit[term] / 100
 
-                total_amount += amount * (1 + percent - 1) * (term / 12)
+                total_amount += amount * percent * (term / 12)
         if not total_amount:
             raise ValueError('Указана неправильная сумма вклада')
         return total_amount
