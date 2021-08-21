@@ -31,8 +31,7 @@ def calculate_total_amount(amount: float, term: int,
         :return: сумма дополнительных вкладов на конец срока
         """
         nonlocal add_amount, term
-        add_amount += (add_amount * (1 + percent - 1) * (
-                (term - 2) / 12))
+        add_amount += (add_amount * percent * ((term - 2) / 12))
         return add_amount * (term - 2)
 
     total_amount = 0
@@ -42,7 +41,7 @@ def calculate_total_amount(amount: float, term: int,
                 total_amount = amount
                 percent = bank_deposit[term] / 100
 
-                total_amount += amount * (1 + percent - 1) * (term / 12)
+                total_amount += amount * percent * (term / 12)
                 total_amount += additional_funds()
         if not total_amount:
             raise ValueError('Указана неправильная сумма вклада')
