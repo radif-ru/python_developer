@@ -1,3 +1,6 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Suppliers, Goods
+
+admin.site.register(Suppliers)
+admin.site.register(Goods)
