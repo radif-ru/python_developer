@@ -42,6 +42,8 @@ INSTALLED_APPS = [
 
     'widget_tweaks',
 
+    'goods_app.apps.GoodsAppConfig',
+
 ]
 
 MIDDLEWARE = [
