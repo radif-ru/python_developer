@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+
+{% block container %}
+  <a class="btn btn-light" href="{% url 'goods' %}">Перейти к списку товаров</a>
+  {% include 'inc/form.html' %}
+{% endblock %}
