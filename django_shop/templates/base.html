@@ -7,11 +7,17 @@
   <meta name="contact" content="mail@radif.ru"/>
   <meta name="copyright" content="© Radif.ru, Django project, 2021."/>
   <title>{{ page_title|default:"Товары"|title }}</title>
-
   {% block css %}
+    <link
+        rel="stylesheet"
+        href="{% static 'node_modules/bootstrap/dist/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
   {% endblock %}
 
   {% block js %}
+    <script
+        src="{% static 'node_modules/bootstrap/dist/js/bootstrap.min.js' %}">
+    </script>
   {% endblock %}
 </head>
 <body>
