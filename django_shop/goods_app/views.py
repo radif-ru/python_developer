@@ -6,7 +6,7 @@ from .models import Goods
 
 
 class GoodsModelListView(ListView):
-    template_name = 'index.html'
+    template_name = 'goods_list.html'
     # Группировка запросов для OneToOne
     queryset = Goods.objects.select_related('supplier').all()
     # Группировка запросов для ManyToMany
@@ -14,6 +14,6 @@ class GoodsModelListView(ListView):
 
 
 class GoodsModelFormView(FormView, CreateView):
-    template_name = 'create_good_form.html'
+    template_name = 'good_create.html'
     form_class = GoodsForm
     success_url = reverse_lazy('goods')
