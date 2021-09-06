@@ -45,5 +45,5 @@ class Goods(models.Model):
     class Meta:
         verbose_name = 'Товар'
         verbose_name_plural = 'Товары'
-        ordering = ['date_receipt', 'name']
+        ordering = ['-date_receipt', 'name']
         unique_together = (('name', 'supplier'),)
