@@ -14,11 +14,18 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
   {% endblock %}
 
+  {% block additional_css %}
+  {% endblock %}
+
   {% block js %}
     <script
         src="{% static 'node_modules/bootstrap/dist/js/bootstrap.min.js' %}">
     </script>
   {% endblock %}
+
+  {% block additional_js %}
+  {% endblock %}
+
 </head>
 <body>
 <div class="my-container">
