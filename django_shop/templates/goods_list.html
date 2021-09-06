@@ -1,25 +1,69 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block additional_js %}
+  <script src="{% static 'node_modules/jquery/dist/jquery.min.js' %}"></script>
+  <script>
+  $(function () {
+
+  /* Код функций */
+
+  let loadForm = function () {
+    let btn = $(this);
+    $.ajax({
+      url: btn.attr("data-url"),
+      type: 'get',
+      dataType: 'json',
+      beforeSend: function () {
+        $("#modal-good").modal("show");
+      },
+      success: function (data) {
+        $("#modal-good .modal-content").html(data.html_form);
+      }
+    });
+  };
+
+  let saveForm = function () {
+    let form = $(this);
+    $.ajax({
+      url: form.attr("action"),
+      data: form.serialize(),
+      type: form.attr("method"),
+      dataType: 'json',
+      success: function (data) {
+        if (data.form_is_valid) {
+          $("#good-table tbody").html(data.html_good_list);
+          $("#modal-good").modal("hide");
+        }
+        else {
+          $("#modal-good .modal-content").html(data.html_form);
+        }
+      }
+    });
+    return false;
+  };
+
+  /* Подключение функций */
+
+  $(".js-create-good").click(loadForm);
+  $("#modal-good").on("submit", ".js-good-create-form", saveForm);
+
+});
+  </script>
+{% endblock %}
 
 {% block container %}
-  <a class="btn btn-light" href="{% url 'create_good' %}">Добавить товар</a>
-  <table class="goods-table">
-    <tr>
-      <th>Название</th>
-      <th>Поставщик</th>
-      <th>Цена</th>
-      <th>Валюта</th>
-      <th>Поступление</th>
-      <th>Обновление</th>
-    </tr>
-    {% for object in object_list %}
-      <tr>
-        <td>{{ object.name }}</td>
-        <td>{{ object.supplier }}</td>
-        <td>{{ object.price }}</td>
-        <td>{{ object.measure_unit }}</td>
-        <td>{{ object.date_receipt }}</td>
-        <td>{{ object.date_upd }}</td>
-      </tr>
-    {% endfor %}
-  </table>
+  <button type="button" class="js-create-good btn btn-light"
+          data-url="{% url 'good_create' %}">Добавить товар
+  </button>
+
+  {% include 'inc/partial_goods_list.html' %}
+
+  <div class="modal fade" id="modal-good">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        {% include 'good_create.html' %}
+      </div>
+    </div>
+  </div>
 {% endblock %}
