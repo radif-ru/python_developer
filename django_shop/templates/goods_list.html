@@ -3,53 +3,7 @@
 
 {% block additional_js %}
   <script src="{% static 'node_modules/jquery/dist/jquery.min.js' %}"></script>
-  <script>
-  $(function () {
-
-  /* Код функций */
-
-  let loadForm = function () {
-    let btn = $(this);
-    $.ajax({
-      url: btn.attr("data-url"),
-      type: 'get',
-      dataType: 'json',
-      beforeSend: function () {
-        $("#modal-good").modal("show");
-      },
-      success: function (data) {
-        $("#modal-good .modal-content").html(data.html_form);
-      }
-    });
-  };
-
-  let saveForm = function () {
-    let form = $(this);
-    $.ajax({
-      url: form.attr("action"),
-      data: form.serialize(),
-      type: form.attr("method"),
-      dataType: 'json',
-      success: function (data) {
-        if (data.form_is_valid) {
-          $("#good-table tbody").html(data.html_good_list);
-          $("#modal-good").modal("hide");
-        }
-        else {
-          $("#modal-good .modal-content").html(data.html_form);
-        }
-      }
-    });
-    return false;
-  };
-
-  /* Подключение функций */
-
-  $(".js-create-good").click(loadForm);
-  $("#modal-good").on("submit", ".js-good-create-form", saveForm);
-
-});
-  </script>
+  <script src="{% static 'js/good_create.js' %}"></script>
 {% endblock %}
 
 {% block container %}
@@ -57,7 +11,9 @@
           data-url="{% url 'good_create' %}">Добавить товар
   </button>
 
-  {% include 'inc/partial_goods_list.html' %}
+  <div class="goods-table">
+    {% include 'inc/partial_goods_list.html' %}
+  </div>
 
   <div class="modal fade" id="modal-good">
     <div class="modal-dialog">
