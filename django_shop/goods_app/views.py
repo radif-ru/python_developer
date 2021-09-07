@@ -26,8 +26,9 @@ class GoodsModelFormView(FormView, CreateView):
         response = super().form_invalid(form)
         if self.request.is_ajax():
             data = {
-                'form_is_valid': False
-                }
+                'form_is_valid': False,
+                'html_form': response.rendered_content
+            }
             return JsonResponse(data)
         else:
             return response
@@ -37,9 +38,11 @@ class GoodsModelFormView(FormView, CreateView):
         if self.request.is_ajax():
             data = {
                 'form_is_valid': True,
-                'html_good_list': render_to_string('goods_list.html', {
-                    'goods': Goods.objects.select_related('supplier').all()
-                })
+                'html_good_list': render_to_string(
+                    'inc/partial_goods_list.html', {
+                        'object_list': Goods.objects.select_related(
+                            'supplier').all()
+                    }),
             }
             return JsonResponse(data)
         else:
