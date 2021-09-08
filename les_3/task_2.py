@@ -27,7 +27,9 @@ if __name__ == '__main__':
             number = float(input_data)
         except ValueError:
             try:
+                # проверяем возможно разделитель "," вместо ".", замена ","
                 input_data = input_data.replace(',', '.')
+                # если снова ошибка просим ввести правильное число
                 number = float(input_data)
             except ValueError:
                 print(f'Необходимо ввести целое или дробное число!')
