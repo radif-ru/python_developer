@@ -15,7 +15,7 @@ def get_name_from_full_path(file_name: str) -> str:
     """
     abs_path = abspath(file_name)
     name_extension = abs_path.split('\\')[-1]
-    # учет возможности наличия точек в имени файла, часть до расширения 
+    # учет возможности наличия точек в имени файла, часть до расширения
     name = '.'.join(name_extension.split('.')[0:-1])
     if name:
         # если у имени есть расширение возвращаем часть до расширения
