@@ -147,7 +147,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Вывод запросов к бд в консоль
 if DEBUG:
     LOGGING = {
         'version': 1,
@@ -157,6 +156,7 @@ if DEBUG:
                 'class': 'logging.StreamHandler',
             },
         },
+        # Вывод запросов к бд в консоль
         'loggers': {
             'django.db.backends': {
                 'level': 'DEBUG',
@@ -165,9 +165,8 @@ if DEBUG:
         },
     }
 
-
 # Затирание переменных локальными настройками (если есть):
 try:
-    from local_settings import *
+    from .local_settings import *
 except ImportError:
     pass
