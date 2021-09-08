@@ -14,9 +14,9 @@ def get_name_from_full_path(file_name: str) -> str:
     :return: str имя файла (без расширения)
     """
     abs_path = abspath(file_name)
-    name = abs_path.split('\\')[-1].split('.')[0]
+    name = '.'.join(abs_path.split('\\')[-1].split('.')[0:-1])
     return name
 
 
 if __name__ == '__main__':
-    print(get_name_from_full_path('task_1.py'))
+    print(get_name_from_full_path('example.file.exe'))
