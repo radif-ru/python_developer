@@ -22,10 +22,15 @@ def integer_equal_decimal(num: float) -> bool or None:
 
 if __name__ == '__main__':
     while True:
+        input_data = input('Введите число: ')
         try:
-            number = float(input('Введите число: '))
+            number = float(input_data)
         except ValueError:
-            print(f'Необходимо ввести целое или дробно число!')
-            continue
+            try:
+                input_data = input_data.replace(',', '.')
+                number = float(input_data)
+            except ValueError:
+                print(f'Необходимо ввести целое или дробное число!')
+                continue
         print(integer_equal_decimal(number))
         break
